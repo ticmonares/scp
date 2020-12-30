@@ -1,0 +1,196 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+/* html{
+    font-size: 64%;
+} 
+*/
+body{
+    /*font-size: 1.5rem;*/
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f0f0f0;
+    color: #494949;  
+    min-height: 100vh;
+    position: relative;
+    margin: 0;
+    padding:0;
+    padding-bottom: 50px; /*height of the footer*/
+    box-sizing: border-box;
+}
+h1,h2{
+    font-weight: 700;
+    color: inherit;
+}
+h1.encabezado{
+    color: #494949;  
+}
+.table{
+    background: #fff;
+    /* font-size: .8rem; */
+    width: max-content;
+}
+.table tr:nth-child(2n) {
+    background: #e3e3e3;
+}
+#logo{
+    width: 100rem;
+}
+.img-main-logo{
+    margin-top: 2rem;
+    width: 30rem;
+    border-radius: 50%;
+}
+.error{
+    color: #ee0000;
+}.resaldato{
+    color: #521894;
+    font-weight: bold;
+    font-size: 1.2rem;
+}   
+/*
+display:flex;
+    flex-direction:column;
+    align-items:center;
+    align-content:center;
+*/
+.btn-container{
+    margin-top: 1rem;;
+}
+.button{
+    padding: 1rem;
+    background: #b91c29;
+    color:  #ffffff;
+    border-radius: 2rem;;
+}
+a.button{
+    text-decoration: none;
+}
+.bg-red-pj{
+    background: #521894;
+}
+.btn-dark.btn.bg-red-pj:hover{
+    background: #240844;
+}
+.btn-dark.btn.bg-red-pj:active{
+    background: #8836e6;
+}
+.btn-dark.btn.bg-red-pj:focus{
+    background: #8836e6;
+}
+.page-footer {
+    color:  #ffffff;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  height: 50px;
+  width: 100%;
+}
+footer.div{
+    padding:0;
+}
+.card{
+    border-radius: 1rem;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5);
+}
+.card-login{
+    width: 18rem;
+}
+.card-login img{
+    width: 10rem;
+    height: auto;
+    border-radius: 20rem;;
+    margin: 0 auto 10px;
+    display: block;
+}
+
+.form-inline .form-control.registro-select{
+    width: 20rem;
+}
+#logo-main-index{
+    width: 25rem;
+}
+
+/* .regiones-map{
+    width: 33rem;
+} */
+#header{
+    /* margin-bottom: 56px; */
+    margin-bottom: 85px;
+}
+.header-main{
+    font-weight: bold;
+    color: #521894;
+}
+.tbl-heading:hover{
+    cursor: pointer;
+}
+.page-item.active .page-link {
+    background-color: #521894;
+    border-color: #dee2e6;
+}
+
+.page-link{ 
+    color:  #2b2b2b;
+}
+.page-link:hover {
+    color: #521894;
+}
+.img-inmueble{
+    width: 40vw;
+    /* max-width: 41rem; */
+    border-radius: 1rem;
+    /* height: 10rem;  */
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+}
+/*
+Aplicamos esta regla para que todas las miagenes se muestren del
+mismo tamaño pero sin deformarse
+*/
+@supports(object-fit: cover){
+    .img-inmueble{
+      height: 10rem;
+      object-fit: cover;
+      object-position: center center;
+    }
+}
+.rounded{
+    border-radius:1rem !important;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+}
+
+.planos-pdf{
+    width: 100%;
+    height: 50vh;
+}
+
+/*Formulario con pasos*/
+/* Nav Tabs */
+.nav.nav-tabs .nav-item .nav-link{
+    color: #6533ed;
+}
+.nav.nav-tabs .nav-item .nav-link.disabled{
+    color: #494949;  
+}
+.nav.nav-tabs .nav-item .nav-link.active{
+    color: #521894;
+}
+
+.form-pasos{
+    background: #fff;
+    padding: 1rem;
+    border: 1px solid #dee2e6;
+    border-top: 0px;
+}
+.form-pasos.disabled{
+    display: none;
+}
+.form-pasos.enabled{
+    display: block;
+}
+.form-text{
+    color: #494949;  
+    font-size: .8rem;
+}
