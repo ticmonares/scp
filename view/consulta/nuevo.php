@@ -25,25 +25,26 @@
                 }
                 ?>
             </div>
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a id="nav-formPaso0" class=" form-paso formPaso0 nav-link active " href="#" onclick="irAPaso('formPaso0','formPaso0')">General</a>
+                </li>
+                <li class="nav-item">
+                    <a id="nav-formPaso1" class=" form-paso formPaso1 nav-link disabled " href="#" onclick="irAPaso('formPaso0','formPaso1')">Datos clínicos</a>
+                </li>
+                <li class="nav-item">
+                    <a id="nav-formPaso2" class=" form-paso formPaso2 nav-link disabled " href="#" onclick="irAPaso('formPaso0','formPaso2')">Actividad física</a>
+                </li>
+                <li class="nav-item">
+                    <a id="nav-formPaso3" class=" form-paso formPaso3 nav-link disabled " href="#" onclick="irAPaso('formPaso0','formPaso3')">Alimentación</a>
+                </li>
+                <li class="nav-item">
+                    <a id="nav-formPaso4" class=" form-paso formPaso4 nav-link disabled " href="#" onclick="irAPaso('formPaso0','formPaso4')">Detalles clínicos</a>
+                </li>
+            </ul>
+            
             <form action="<?php echo constant('URL') . 'consulta/registrarNuevo'; ?>" method="POST" enctype="multipart/form-data">
 
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <a id="nav-formPaso0" class=" form-paso formPaso0 nav-link active " href="#" onclick="irAPaso('formPaso0','formPaso0')">General</a>
-                    </li>
-                    <li class="nav-item">
-                        <a id="nav-formPaso1" class=" form-paso formPaso1 nav-link disabled " href="#" onclick="irAPaso('formPaso0','formPaso1')">Datos clínicos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a id="nav-formPaso2" class=" form-paso formPaso2 nav-link disabled " href="#" onclick="irAPaso('formPaso0','formPaso2')">Actividad física</a>
-                    </li>
-                    <li class="nav-item">
-                        <a id="nav-formPaso3" class=" form-paso formPaso3 nav-link disabled " href="#" onclick="irAPaso('formPaso0','formPaso3')">Alimentación</a>
-                    </li>
-                    <li class="nav-item">
-                        <a id="nav-formPaso4" class=" form-paso formPaso4 nav-link disabled " href="#" onclick="irAPaso('formPaso0','formPaso4')">Detalles clínicos</a>
-                    </li>
-                </ul>
 
                 <section id="form-main">
 
@@ -54,7 +55,7 @@
                             <div class="col-sm-4">
                                 <label for="cve_paciente"><span class="resaltado">*</span>Clave paciente</label>
                                 <div class="col-12">
-                                    <input type="number" min="0" class="form-control" name="cve_paciente" id="cve_paciente" required>
+                                    <input type="number" min="0" class="form-control " name="cve_paciente" id="cve_paciente" required>
                                 </div>
                             </div>
                         </div>
@@ -84,7 +85,7 @@
                             <div class="col-sm-4">
                                 <label for="genero"><span class="resaltado">*</span>Género</label>
                                 <div class="col-12">
-                                    <select class="form-control" name="genero" id="genero" class="genero" required>
+                                    <select class="form-select" name="genero" id="genero" class="genero" required>
                                         <option value="F" selected>Femenino</option>
                                         <option value="M">Masculino</option>
                                         <option value="O">Otro</option>
@@ -126,7 +127,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row mb-4">
                             <div class="col-sm-4">
                                 <label for="movil"><span class="resaltado">*</span>Celular</label>
                                 <div class="col-12">
@@ -171,15 +172,15 @@
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <label for="cintura" class="col-form-label">Circunferencia de cintura</label>
+                                <label for="cintura" class="col-form-label"><span class="resaltado">*</span>Circunferencia de cintura</label>
                                 <div class="col-12">
-                                    <input type="number" class="form-control" name="cintura" id="cintura" placeholder="Circunferencia en centímetros" min="0">
+                                    <input type="number" class="form-control" name="cintura" id="cintura" placeholder="Circunferencia en centímetros" min="0" required>
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <label for="cadera" class="col-form-label">Circunferencia de cadera</label>
+                                <label for="cadera" class="col-form-label"><span class="resaltado">*</span>Circunferencia de cadera</label>
                                 <div class="col-12">
-                                    <input type="number" class="form-control" name="cadera" id="cadera" placeholder="Circunferencia en centímetros" min="0">
+                                    <input type="number" class="form-control" name="cadera" id="cadera" placeholder="Circunferencia en centímetros" min="0" required>
                                 </div>
                             </div>
                         </div>
@@ -192,7 +193,7 @@
                             <div class="col-sm-4">
                                 <label for="actividad-fisica" class="col-form-label"><span class="resaltado">*</span>¿Cuánta actividad física realiza?</label>
                                 <div class="col-12">
-                                    <select name="actividad-fisica" id="actividad-fisica" class="form-control" required>
+                                    <select name="actividad-fisica" id="actividad-fisica" class="form-select" required>
                                         <option value="0">Nada</option>
                                         <option value="1">Poca</option>
                                         <option value="2">Regular</option>
@@ -203,7 +204,7 @@
                             <div class="col-sm-4">
                                 <label for="frecuencia-af" class="col-form-label"><span class="resaltado">*</span>¿Cuántos días a la semana?</label>
                                 <div class="col-12">
-                                    <select name="frecuencia-af" id="frecuencia-af" class="form-control" required>
+                                    <select name="frecuencia-af" id="frecuencia-af" class="form-select" required>
                                         <option value="0">0 días a la semana</option>
                                         <option value="1">1 días a la semana</option>
                                         <option value="2">2 días a la semana</option>
@@ -230,7 +231,7 @@
                             <div class="col-sm-4">
                                 <label for="apetito" class="col-form-label"><span class="resaltado">*</span>Apetito</label>
                                 <div class="col-12">
-                                    <select name="apetito" id="apetito" class="form-control" required>
+                                    <select name="apetito" id="apetito" class="form-select" required>
                                         <option value="0">Malo</option>
                                         <option value="1">Regular</option>
                                         <option value="2">Bueno</option>
@@ -240,7 +241,7 @@
                             <div class="col-sm-4">
                                 <label for="horario-hambre" class="col-form-label"><span class="resaltado">*</span>¿En qué horario tiene mas hambre?</label>
                                 <div class="col-12">
-                                    <select name="horario-hambre" id="horario-hambre" name="horario-hambre" class="form-control" required>
+                                    <select name="horario-hambre" id="horario-hambre" name="horario-hambre" class="form-select" required>
                                         <option value="Mañana">Mañana</option>
                                         <option value="Tarde">Tarde</option>
                                         <option value="Noche">Noche</option>
@@ -269,28 +270,28 @@
                                 <label for="dieta-fin-semana" class="col-form-label"><span class="resaltado">*</span>Dieta en fin de semana</label>
                                 <div class="col-12">
                                     <input type="text" class="form-control" id="dieta-fin-semana" name="dieta-fin-semana" required>
-                                    <div id="dieta-fin-semana" class="form-text">Por ejemplo: si comes en restaurantes y no en casa, si comes postres o refrescos</div>
+                                    <div id="help-dieta-fin-semana" class="form-text">Por ejemplo: si comes en restaurantes y no en casa, si comes postres o refrescos</div>
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <label for="alimentos-ok" class="col-form-label"><span class="resaltado">*</span>Alimentos preferidos</label>
                                 <div class="col-12">
                                     <input type="text" class="form-control" id="alimentos-ok" name="alimentos-ok" required>
-                                    <div id="alimentos-ok" class="form-text">Separar con comas.</div>
+                                    <div id="help-alimentos-ok" class="form-text">Separar con comas.</div>
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <label for="alimentos-bad" class="col-form-label"><span class="resaltado">*</span>Alimentos que causen malestar</label>
                                 <div class="col-12">
                                     <input type="text" class="form-control" id="alimentos-bad" name="alimentos-bad" required>
-                                    <div id="alimentos-bad" class="form-text">Separar con comas.</div>
+                                    <div id="help-alimentos-bad" class="form-text">Separar con comas.</div>
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <label for="alimentos-alergia" class="col-form-label"><span class="resaltado">*</span>Alimentos que causen alérgia</label>
                                 <div class="col-12">
                                     <input type="text" class="form-control" id="alimentos-alergia" name="alimentos-alergia" required>
-                                    <div id="alimentos-alergia" class="form-text">Separar con comas.</div>
+                                    <div id="help-alimentos-alergia" class="form-text">Separar con comas.</div>
                                 </div>
                             </div>
                         </div>
@@ -301,21 +302,21 @@
                                 <label for="agua" class="col-form-label"><span class="resaltado">*</span>¿Cuantos litros de agua toma al día?</label>
                                 <div class="col-12">
                                     <input type="number" class="form-control" id="agua" name="agua" required>
-                                    <div id="agua" class="form-text">Dato aproximado. </div>
+                                    <div id="help-agua" class="form-text">Dato aproximado. </div>
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <label for="liquidos" class="col-form-label">Consumo de líquidos al día aproximadamente</label>
                                 <div class="col-12">
                                     <input type="number" class="form-control" id="liquidos" name="liquidos">
-                                    <div id="liquidos" class="form-text">No agua, por ejemplo: leche, jugo, café. </div>
+                                    <div id="help-liquidos" class="form-text">No agua, por ejemplo: leche, jugo, café. </div>
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <label for="drogas" class="col-form-label">Consumo de drogas </label>
                                 <div class="col-12">
                                     <input type="text" class="form-control" id="drogas" name="drogas">
-                                    <div id="drogas" class="form-text">Por ejemplo: café, tabaco, alcohol. </br> *Separar con comas.</div>
+                                    <div id="help-drogas" class="form-text">Por ejemplo: café, tabaco, alcohol. </br> *Separar con comas.</div>
                                 </div>
                             </div>
                         </div>
@@ -350,28 +351,28 @@
                                 <label for="problemas-actuales" class="col-form-label">Problemas actuales</label>
                                 <div class="col-12">
                                     <input type="text" class="form-control" id="problemas-actuales" name="problemas-actuales">
-                                    <div id="problemas-actuales" class="form-text">Por ejemplo: diarrea, colítis, estreñimiento, etc. </br> *Separar con comas.</div>
+                                    <div id="help-problemas-actuales" class="form-text">Por ejemplo: diarrea, colítis, estreñimiento, etc. </br> *Separar con comas.</div>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <label for="enfermedad-importante" class="col-form-label">Enfermedad importante</label>
                                 <div class="col-12">
                                     <input type="text" class="form-control" id="enfermedad-importante" name="enfermedad-importante">
-                                    <div id="enfermedad-importante" class="form-text">Por ejemplo: diabetes, etc. </br> *Separar con comas.</div>
+                                    <div id="help-enfermedad-importante" class="form-text">Por ejemplo: diabetes, etc. </br> *Separar con comas.</div>
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <label for="medicamento" class="col-form-label">Enfermedad importante</label>
+                                <label for="medicamento" class="col-form-label">Medicamento</label>
                                 <div class="col-12">
                                     <input type="text" class="form-control" id="medicamento" name="medicamento">
-                                    <div id="medicamento" class="form-text">Por ejemplo: aspirinas y demás jaja (borrame). </br> *Separar con comas.</div>
+                                    <div id="help-medicamento" class="form-text">Por ejemplo: aspirinas y demás jaja (borrame). </br> *Separar con comas.</div>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <label for="dosis-medicamento" class="col-form-label">Dosis medicamento</label>
                                 <div class="col-12">
                                     <input type="number" class="form-control" id="dosis-medicamento" name="dosis-medicamento">
-                                    <div id="dosis-medicamento" class="form-text">Por ejemplo: aspirinas y demás jaja (borrame). </br> *Separar con comas.</div>
+                                    <div id="help-dosis-medicamento" class="form-text">Por ejemplo: aspirinas y demás jaja (borrame). </br> *Separar con comas.</div>
                                 </div>
                             </div>
                         </div>
@@ -383,14 +384,14 @@
                                 <label for="aspectos-ginecologicos" class="col-form-label">Aspectos Ginecológicos</label>
                                 <div class="col-12">
                                     <input type="text" class="form-control" id="aspectos-ginecologicos" name="aspectos-ginecologicos">
-                                    <div id="aspectos-ginecologicos" class="form-text">Por ejemplo: Embarazo actual, Uso de anticonceptivos orales, etc. </br> *Separar con comas.</div>
+                                    <div id="help-aspectos-ginecologicos" class="form-text">Por ejemplo: Embarazo actual, Uso de anticonceptivos orales, etc. </br> *Separar con comas.</div>
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <label for="enfermedad-importante" class="col-form-label">Cuales y/o desde cuando</label>
+                                <label for="detalles-ginecologicos" class="col-form-label">Cuales y/o desde cuando</label>
                                 <div class="col-12">
-                                    <input type="text" class="form-control" id="enfermedad-importante" name="enfermedad-importante">
-                                    <div id="enfermedad-importante" class="form-text">En caso de que alguna de tu respuesta anterior sea SI, por favor especifica </br> *Separar con comas.</div>
+                                    <input type="text" class="form-control" id="detalles-ginecologicos" name="detalles-ginecologicos">
+                                    <div id="help-detalles-ginecologicos" class="form-text">En caso de que alguna de tu respuesta anterior sea SI, por favor especifica </br> *Separar con comas.</div>
                                 </div>
                             </div>
                         </div>
@@ -398,24 +399,24 @@
                         <h5>Detalles bioqímicos</h5>
                         <div class="form-group row" id="subFormMujeres">
                             <div class="col-sm-6">
-                                <label for="aspectos-ginecologicos" class="col-form-label">Detalles bioquímicos rlevantes</label>
+                                <label for="detalles-bioquimicos" class="col-form-label">Detalles bioquímicos rlevantes</label>
                                 <div class="col-12">
-                                    <input type="text" class="form-control" id="aspectos-ginecologicos" name="aspectos-ginecologicos">
-                                    <div id="aspectos-ginecologicos" class="form-text">Algún valor bioquímico que sepas que tienes elevado o bajo. </br> *Separar con comas.</div>
+                                    <input type="text" class="form-control" id="detalles-bioquimicos" name="detalles-bioquimicos">
+                                    <div id="help-detalles-bioquimicos" class="form-text">Algún valor bioquímico que sepas que tienes elevado o bajo. </br> *Separar con comas.</div>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <label for="presion-arterial" class="col-form-label">Presión arterial</label>
                                 <div class="col-12">
                                     <input type="text" class="form-control" id="presion-arterial" name="presion-arterial">
-                                    <div id="presion-arterial" class="form-text">en caso de que conozcas este dato, por favor anota valor, fecha y hora de la lectura.</div>
+                                    <div id="help-presion-arterial" class="form-text">en caso de que conozcas este dato, por favor anota valor, fecha y hora de la lectura.</div>
                                 </div>
                             </div>
                             <div class="col-sm-12">
                                 <label for="doc-evaluacion-bioquimica" class="col-form-label">Evaluación bioqímica</label>
                                 <div class="col-12">
                                     <input class="form-control" type="file" name="doc-evaluacion-bioquimica" id="doc-evaluacion-bioquimica">
-                                    <div id="doc-evaluacion-bioquimica" class="form-text">En caso de tener algun documento, foto, datos, etc...por favor, adjunta el archivo.</div>
+                                    <div id="help-doc-evaluacion-bioquimica" class="form-text">En caso de tener algun documento, foto, datos, etc...por favor, adjunta el archivo.</div>
                                 </div>
                             </div>
                         </div>
@@ -423,10 +424,10 @@
                 </section> <!-- Cerramos el section principal -->
                 <div class="row pt-3 pb-5">
                     <div class="col-2">
-                        <a id="btnAtras" class="btn btn-dark bg-red-pj float-left disabled" onclick="irAPaso('fromPaso0','formPaso-1')">Anterior</a>
+                        <a id="btnAtras" class="btn btn-dark bg-main float-left disabled" onclick="irAPaso('fromPaso0','formPaso-1')">Anterior</a>
                     </div>
                     <div class="col-2 offset-8">
-                        <a id="btnSiguiente" class="btn btn-dark bg-red-pj float-left" onclick="irAPaso('formPaso0','formPaso1')">Siguente</a>
+                        <a id="btnSiguiente" class="btn btn-dark bg-main float-left" onclick="irAPaso('formPaso0','formPaso1')">Siguente</a>
                     </div>
                 </div>
             </form>

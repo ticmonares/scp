@@ -15,7 +15,7 @@
     <!-- default -->
     <link rel="stylesheet" href="<?php echo constant('URL') . 'resources/css/default.css'; ?>">
     <!-- preloader -->
-    
+
 
 
 </head>
@@ -23,54 +23,59 @@
 <body>
     <!--Aquí va el menu-->
     <div id="header">
-        <nav class="navbar navbar-expand-lg  navbar-dark fixed-top bg-red-pj">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <?php
-                    if (Core::validarSU()) {
-                    ?>
-                        <li class="nav-item"><a class="nav-link" href="<?php echo constant('URL'); ?>main">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link" href="<?php echo constant('URL'); ?>usuarios">Usuarios</a></li>
-                        <li class="nav-item"><a class="nav-link" href="<?php echo constant('URL'); ?>consulta/nuevoRegistro">Nuevo Registro</a></li>
-                        <li class="nav-item"><a class="nav-link" href="<?php echo constant('URL'); ?>consulta">Consulta Registros</a></li>
-                        <li class="nav-item"><a class="nav-link" href="<?php echo constant('URL'); ?>consulta">Agendar cita</a></li>
-                        <!--                 <li class= "nav-item" ><a class="nav-link" href="<?php echo constant('URL'); ?>perfil">Perfil</a></li> -->
-                        <li class="nav-item"><a class="nav-link" href="<?php echo constant('URL'); ?>ayuda">Ayuda</a></li>
-                        <li class="nav-item"><a class="nav-link" href="<?php echo constant('URL'); ?>cerrarsesion/cerrarSesion">Cerrar sesión</a></li>
-                    <?php
-                    }
-                    ?>
-                    <?php
-                    if (Core::validarAD()) {
-                    ?>
-                        <li class="nav-item"><a class="nav-link" href="<?php echo constant('URL'); ?>main">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link" href="<?php echo constant('URL'); ?>consulta/nuevoRegistro">Nuevo Registro</a></li>
-                        <li class="nav-item"><a class="nav-link" href="<?php echo constant('URL'); ?>consulta">Consulta Registros</a></li>
-                        <li class="nav-item"><a class="nav-link" href="<?php echo constant('URL'); ?>consulta">Agendar cita</a></li>
-                        <!--<li class="nav-item"><a class="nav-link" href="<?php echo constant('URL'); ?>perfil">Perfil</a></li> -->
-                        <li class="nav-item"><a class="nav-link" href="<?php echo constant('URL'); ?>ayuda">Ayuda</a></li>
-                        <li class="nav-item"><a class="nav-link" href="<?php echo constant('URL'); ?>cerrarsesion/cerrarSesion">Cerrar sesión</a></li>
-                    <?php
-                    }
-                    ?>
-                    <?php
-                    if (Core::validarUS()) {
-                    ?>
-                        <li class="nav-item"><a class="nav-link" href="<?php echo constant('URL'); ?>main">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link" href="<?php echo constant('URL'); ?>consulta">Consulta Registros</a></li>
-                        <li class="nav-item"><a class="nav-link" href="<?php echo constant('URL'); ?>consulta">Agendar cita</a></li>
-                        <!--<li class="nav-item"><a class="nav-link" href="<?php echo constant('URL'); ?>perfil">Perfil</a></li> -->
-                        <li class="nav-item"><a class="nav-link" href="<?php echo constant('URL'); ?>ayuda">Ayuda</a></li>
-                        <li class="nav-item"><a class="nav-link" href="<?php echo constant('URL'); ?>cerrarsesion/cerrarSesion">Cerrar sesión</a></li>
-                    <?php
-                    }
-                    ?>
-                </ul>
+        <nav class="navbar navbar-expand-lg  navbar-dark fixed-top bg-main ">
+
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"><?php echo constant('EMPRESA') ?></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <?php
+                        if (Core::validarSU()) {
+                        ?>
+                            <li class="nav-item"><a class="nav-link" href="<?php echo constant('URL'); ?>main">Inicio</a></li>
+                            <li class="nav-item"><a class="nav-link" href="<?php echo constant('URL'); ?>usuarios">Usuarios</a></li>
+                            <li class="nav-item"><a class="nav-link" href="<?php echo constant('URL'); ?>consulta/nuevoRegistro">Nuevo Registro</a></li>
+                            <li class="nav-item"><a class="nav-link" href="<?php echo constant('URL'); ?>consulta">Consulta Registros</a></li>
+                            <li class="nav-item"><a class="nav-link" href="<?php echo constant('URL'); ?>consulta">Agendar cita</a></li>
+                            <!--                 <li class= "nav-item" ><a class="nav-link" href="<?php echo constant('URL'); ?>perfil">Perfil</a></li> -->
+                            <li class="nav-item"><a class="nav-link" href="<?php echo constant('URL'); ?>ayuda">Ayuda</a></li>
+                            <li class="nav-item"><a class="nav-link" href="<?php echo constant('URL'); ?>cerrarsesion/cerrarSesion">Cerrar sesión</a></li>
+                        <?php
+                        }
+                        ?>
+                        <?php
+                        if (Core::validarAD()) {
+                        ?>
+                            <li class="nav-item"><a class="nav-link" href="<?php echo constant('URL'); ?>main">Inicio</a></li>
+                            <li class="nav-item"><a class="nav-link" href="<?php echo constant('URL'); ?>consulta/nuevoRegistro">Nuevo Registro</a></li>
+                            <li class="nav-item"><a class="nav-link" href="<?php echo constant('URL'); ?>consulta">Consulta Registros</a></li>
+                            <li class="nav-item"><a class="nav-link" href="<?php echo constant('URL'); ?>consulta">Agendar cita</a></li>
+                            <!--<li class="nav-item"><a class="nav-link" href="<?php echo constant('URL'); ?>perfil">Perfil</a></li> -->
+                            <li class="nav-item"><a class="nav-link" href="<?php echo constant('URL'); ?>ayuda">Ayuda</a></li>
+                            <li class="nav-item"><a class="nav-link" href="<?php echo constant('URL'); ?>cerrarsesion/cerrarSesion">Cerrar sesión</a></li>
+                        <?php
+                        }
+                        ?>
+                        <?php
+                        if (Core::validarUS()) {
+                        ?>
+                            <li class="nav-item"><a class="nav-link" href="<?php echo constant('URL'); ?>main">Inicio</a></li>
+                            <li class="nav-item"><a class="nav-link" href="<?php echo constant('URL'); ?>consulta">Consulta Registros</a></li>
+                            <li class="nav-item"><a class="nav-link" href="<?php echo constant('URL'); ?>consulta">Agendar cita</a></li>
+                            <!--<li class="nav-item"><a class="nav-link" href="<?php echo constant('URL'); ?>perfil">Perfil</a></li> -->
+                            <li class="nav-item"><a class="nav-link" href="<?php echo constant('URL'); ?>ayuda">Ayuda</a></li>
+                            <li class="nav-item"><a class="nav-link" href="<?php echo constant('URL'); ?>cerrarsesion/cerrarSesion">Cerrar sesión</a></li>
+                        <?php
+                        }
+                        ?>
+                    </ul>
+                </div>
             </div>
         </nav>
+  
     </div>
     <!--Script... RESPETAR ORDEN-->
     <!--JQUERY-->
@@ -85,5 +90,4 @@
     <script type="text/javascript" src="<?php echo constant('URL') . 'resources/dt/jquery.dataTables.min.js'; ?>"></script>
     <script type="text/javascript" src="<?php echo constant('URL') . 'resources/dt/dataTables.bootstrap4.min.js'; ?>"></script>
     <!-- Alertas -->
-    <!-- <script type="text/javascript" src="<?php echo constant('URL') . 'resources/js/sweetalert.min.js'; ?>"></script> -->
-    
+    <script type="text/javascript" src="<?php echo constant('URL') . 'resources/js/sweetalert.min.js'; ?>"></script>

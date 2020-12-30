@@ -1,4 +1,6 @@
-function validaDatosSubform(idSubForm) {
+function validaDatosSubform(idSubForm, idShowSubForm) {
+    let intIdSubForm = parseInt(idSubForm.substr(8));
+    let intIdShowSubForm = parseInt(idShowSubForm.substr(8));
     // console.log('Validamos datos llenos de: ' + idSubForm );
     let datosVacios = 0;
     let datosLlenos = false;
@@ -6,13 +8,26 @@ function validaDatosSubform(idSubForm) {
     let inputsRequired = $subFrom.querySelectorAll('input');
     inputsRequired.forEach(
         $inputRequired => {
+            $inputRequired.addEventListener('change', function (event) {
+                validaDatosSubform(idSubForm, idSubForm);
+            });
             // console.log($inputRequired.required);
-            //Si tiene el atributo required
-            if ($inputRequired.required) {
-                //Y si esta vacío
-                if ($inputRequired.value == "") {
-                    datosVacios++;
-                    $inputRequired.focus();
+            //SOlo  el paso anterior es menor o igual que el que vamos a mostrar hacemos la validación
+            // console.log('Paso actual: ' + idSubForm );
+            // console.log('Paso a mostrar: ' + idShowSubForm );
+            if (intIdSubForm <= intIdShowSubForm) {
+                //Si tiene el atributo required
+                if ($inputRequired.required) {
+                    // console.log('Se ejecuta validación de form');
+                    //Y si esta vacío
+                    if ($inputRequired.value == "") {
+                        $inputRequired.classList.add('input-is-required');
+                        datosVacios++;
+                        $inputRequired.focus();
+                    } else {
+                        $inputRequired.classList.remove('input-is-required');
+                        $inputRequired.classList.add('input-is-required-ok');
+                    }
                 }
             }
         });
@@ -20,6 +35,12 @@ function validaDatosSubform(idSubForm) {
     // console.log('datosLlenos:' + datosLlenos );
     return datosLlenos;
 }
+
+// // Example starter JavaScript for disabling form submissions if there are invalid fields
+// (function () {
+//     'use strict'
+//     console.log('Hola');
+// })()
 
 function escondeSubForm(divId) {
     // console.log("Escondemos a " + divId);
@@ -36,7 +57,7 @@ function muestraSubFrom(divId) {
 }
 
 function irAPaso(divIdActual, divIdShow) {
-    if (validaDatosSubform(divIdActual)) {
+    if (validaDatosSubform(divIdActual, divIdShow)) {
         activaTabSubMenu(divIdShow)
         //Obtenemos el valor númerico del subForm
         let numPasoInt = parseInt(divIdShow.substr(8));
@@ -68,7 +89,13 @@ function irAPaso(divIdActual, divIdShow) {
         $btnSiguiente.removeAttribute('onclick');
         $btnSiguiente.setAttribute('onclick', 'irAPaso("' + pasoActualString + '" , "' + pasoSiguienteString + '")');
     } else {
-        alert("Falta información en este formulario");
+        // alert("Falta información en este formulario");
+        Swal.fire({
+            icon: 'warning',
+            title: 'Advertencia',
+            text: 'Falta información importante en este formulario',
+        });
+
     }
 }
 
@@ -93,11 +120,11 @@ function actualizaTabsSubMenu(idActiveForm) {
         $tabNav.classList.remove('active');
         //Actualizamos el parámetro de la función de las navs para saber cual es el actual
         let classIdForm = $tabNav.id;
-        classIdForm = classIdForm.substr(4,12);
+        classIdForm = classIdForm.substr(4, 12);
         let onclickValue = $tabNav.getAttribute('onclick');
         // console.log(onclickValue);
         $tabNav.removeAttribute('onclick');
-        $tabNav.setAttribute('onclick', 'irAPaso( "'+idActiveForm+'", "' + classIdForm + '")');
+        $tabNav.setAttribute('onclick', 'irAPaso( "' + idActiveForm + '", "' + classIdForm + '")');
     });
     // console.log('Activamos al tab submenu : ' + idActiveForm);
     $idActiveForm = document.querySelectorAll('.' + idActiveForm);
