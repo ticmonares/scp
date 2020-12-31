@@ -30,109 +30,41 @@ class Consulta extends Controller
 
     function  registrarNuevo()
     {
-        if (isset($_POST['region'])) {
+        if (isset($_POST['cve_paciente'])) {
             $mensaje = "";
-            $noExpediente = $_POST['noExpediente'];
-            $noInventario = $_POST['noInventario'];
-            $region = $_POST['region'];
-            $distrito = $_POST['distrito'];
-            $municipio = $_POST['municipio'];
-            $edificio = $_POST['edificio'];
-            $domicilio = $_POST['domicilio'];
-            $modalidad = $_POST['modalidad'];
-            if (isset($_POST['estado_proc'])) {
-                $estado = $_POST['estado_proc'];
-            } else {
-                $estado = 6;
-            }
-            $superficie = $_POST['superficie'];
-            $valorAvaluo = $_POST['valor_avaluo'];
-            //Observaciones
-            $observaciones = $_POST['observaciones'];
-            //Contáctos
-            //Nombres
-            $contactoGobierno = $_POST['nombreGob'];
-            $contactoPropietario = $_POST['nombreProp'];
-            $contactoPJ = $_POST['nombrePJ'];
-            //Teléfonos
-            $telGobierno = $_POST['telGob'];
-            $telPropietario = $_POST['telProp'];
-            $telPJ = $_POST['telPJ'];
-            //Correos
-            $mailGobierno = $_POST['mailGob'];
-            $mailPropietario = $_POST['mailProp'];
-            $mailPJ = $_POST['mailPJ'];
+            $cve_paciente = $_POST['cve_paciente'];
+            $nombres = $_POST['nombres'];
+            $apellido1 = $_POST['apellido1'];
+            $apellido2 = $_POST['apellido2'];
+            $genero = $_POST['genero'];
+            $fecha_nacimiento = $_POST['fecha_nacimiento'];
             $datos = [
-                'noExpediente' => $noExpediente,
-                'noInventario' => $noInventario,
-                'region' => $region,
-                'distrito' => $distrito,
-                'municipio' => $municipio,
-                'edificio' => $edificio,
-                'domicilio' => $domicilio,
-                'modalidad' => $modalidad,
-                'estado' => $estado,
-                'superficie' => $superficie,
-                'valorAvaluo' => $valorAvaluo
+                // 'id_paciente' => null,
+                'cve_paciente', $cve_paciente,
+                'nombres' => $nombres,
+                'apellido1' => $apellido1,
+                'apellido2' => $apellido2,
+                'genero' => $genero,
+                'fecha_nacimiento' => $fecha_nacimiento
             ];
             if ($this->model->insert($datos)) {
                 //print "Exito";
                 //Insertamos la imagen después de crear el regsitro con no_expediente
                 //Envíamos el tercer parámetro como falso
                 //para indicar que no se ejecuta por URL
-                if ($this->insertInmuebleImg($noExpediente, false)) {
-                    $mensaje += "Imagen y ";
-                }
-
-                //Registramos en observaciones, si es que hay
-                if (!$observaciones == "") {
-                    $observacion = $this->model->insertObservacion($noExpediente, $observaciones);
-                    if ($observacion) {
-                        //print "Observación registrada con éxito";
-                        //die();
-                    } else {
-                        //print "Error al registrar observación";
-                        die();
-                    }
-                }
-                //Una vez registrado el inmueble, registramos los contactos
-                if (!$contactoGobierno == "") {
-                    $contacto = $this->model->insertContacto($noExpediente, $contactoGobierno, $telGobierno, $mailGobierno, 1);
-                    if ($contacto) {
-                        // print ("Éxito al registrar contacto gobierno");
-                    } else {
-                        print("Error al registrar contacto gobierno");
-                    }
-                }
-                if (!$contactoPropietario == "") {
-                    $contacto = $this->model->insertContacto($noExpediente, $contactoPropietario, $telPropietario, $mailPropietario, 2);
-                    if ($contacto) {
-                        // print ("Éxito al registrar contacto propietario");
-                    } else {
-                        print("Error al registrar contacto propietario");
-                    }
-                }
-                if (!$contactoPJ == "") {
-                    $contacto = $this->model->insertContacto($noExpediente, $contactoPJ, $telPJ, $mailPJ, 3);
-                    if ($contacto) {
-                        // print ("Éxito al registrar contacto PJ");
-                    } else {
-                        print("Error al registrar contacto PJ");
-                    }
-                }
                 $tipoMensaje = "success";
-                $mensaje = "Expediente de inmueble registrado con éxito";
+                $mensaje = "Expediente creado con éxito";
                 header("location:" . constant('URL') . "consulta/verRegistro/" . $this->model->getLastRegistroId());
             } else {
                 $tipoMensaje = "danger";
-                $mensaje = "ERROR: El número de expediente ya se encuentra registrado";
+                $mensaje = "ERROR AL REGISTRAR: La clave de paciente ya se encuentra registrado";
                 //print "Error";
             }
             $this->view->tipoMensaje = $tipoMensaje;
             $this->view->mensaje = $mensaje;
             //print $mensaje;
-            $regiones = $this->model->getRegiones();
-            $this->view->regiones = $regiones;
+            // $regiones = $this->model->getRegiones();
+            // $this->view->regiones = $regiones;
             $this->view->render('consulta/nuevo');
         } else {
             if (Core::validarSession()) {

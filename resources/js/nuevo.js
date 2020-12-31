@@ -17,8 +17,8 @@ function validaDatosSubform(idSubForm, idShowSubForm) {
             // console.log('Paso a mostrar: ' + idShowSubForm );
             if (intIdSubForm <= intIdShowSubForm) {
                 //Si tiene el atributo required
+                // console.log('Se ejecuta validación de form');
                 if ($inputRequired.required) {
-                    // console.log('Se ejecuta validación de form');
                     //Y si esta vacío
                     if ($inputRequired.value == "") {
                         $inputRequired.classList.add('input-is-required');
@@ -72,9 +72,6 @@ function irAPaso(divIdActual, divIdShow) {
         muestraSubFrom(divIdShow);
         //Acttualizamos los tabs del submenu
         actualizaTabsSubMenu(divIdShow);
-        //Controlamos los botónes para habilitar/deshabilitar
-        controlaBotones(divIdShow);
-
         //Asignamos el valor de los pasos
         let pasoAnterior = numPasoInt - 1;
 
@@ -88,6 +85,8 @@ function irAPaso(divIdActual, divIdShow) {
         $btnAtras.setAttribute('onclick', 'irAPaso( "' + pasoActualString + '", "' + pasoAnteriorString + '")');
         $btnSiguiente.removeAttribute('onclick');
         $btnSiguiente.setAttribute('onclick', 'irAPaso("' + pasoActualString + '" , "' + pasoSiguienteString + '")');
+        //Controlamos los botónes para habilitar/deshabilitar
+        controlaBotones(divIdShow);
     } else {
         // alert("Falta información en este formulario");
         Swal.fire({
@@ -95,7 +94,6 @@ function irAPaso(divIdActual, divIdShow) {
             title: 'Advertencia',
             text: 'Falta información importante en este formulario',
         });
-
     }
 }
 
@@ -108,8 +106,12 @@ function controlaBotones(fromPaso) {
         $btnAtras.classList.remove("disabled")
     }
     if (fromPaso == 'formPaso4') {
-        $btnSiguiente.classList.add("disabled");
+        // $btnSiguiente.classList.add("disabled");
+        $btnSiguiente.innerHTML = 'Registrar';
+        $btnSiguiente.removeAttribute('onclick');
+        $btnSiguiente.setAttribute('onclick', 'registrarPaciente()');
     } else {
+        $btnSiguiente.innerHTML = 'Siguiente';
         $btnSiguiente.classList.remove("disabled");
     }
 }
@@ -142,3 +144,29 @@ function activaTabSubMenu(idActiveForm) {
         }
     );
 }
+
+function registrarPaciente(){
+    if (validaDatosSubform('formPaso4', 'formPaso4')){
+        // var datosFromPaciente = [];
+        // const urlGetMunicipios = "http://localhost/scp/consulta/registrarNuevo/";
+        // let $formulario = document.querySelector('#form-paciente');
+        // let inputs = $formulario.querySelector('input');
+        // inputs.forEach(
+        //     input => {
+        //         let inputId = input.id;
+        //         let inputVal = input.value;
+        //     } 
+        // );
+        let $formulario = document.querySelector('#form-paciente');
+        $formulario.submit();
+    }else {
+        // alert("Falta información en este formulario");
+        Swal.fire({
+            icon: 'warning',
+            title: 'Advertencia',
+            text: 'Falta información importante en este formulario',
+        });
+    }
+}
+
+

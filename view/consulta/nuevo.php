@@ -43,9 +43,7 @@
                 </li>
             </ul>
             
-            <form action="<?php echo constant('URL') . 'consulta/registrarNuevo'; ?>" method="POST" enctype="multipart/form-data">
-
-
+            <form action="<?php echo constant('URL') . 'consulta/registrarNuevo'; ?>" method="POST" enctype="multipart/form-data" id="form-paciente">
                 <section id="form-main">
 
                     <div id="formPaso0" class="form-pasos enabled">
@@ -67,15 +65,15 @@
                                 </div>
                             </div>
                             <div class="col-sm-4">
-                                <label for="apellido_1"><span class="resaltado">*</span>Primer Apellido</label>
+                                <label for="apellido1"><span class="resaltado">*</span>Primer Apellido</label>
                                 <div>
-                                    <input type="text" class="form-control" name="apellido_1" id="apellido_1" required>
+                                    <input type="text" class="form-control" name="apellido1" id="apellido1" required>
                                 </div>
                             </div>
                             <div class="col-sm-4">
-                                <label for="apellido_2"><span class="resaltado">*</span>Segundo Apellido</label>
+                                <label for="apellido2"><span class="resaltado">*</span>Segundo Apellido</label>
                                 <div>
-                                    <input type="text" class="form-control" name="apellido_2" id="apellido_2" required>
+                                    <input type="text" class="form-control" name="apellido2" id="apellido2" required>
                                 </div>
                             </div>
                         </div>
@@ -95,7 +93,7 @@
                             <div class="col-sm-4">
                                 <label for="fecha_nacimiento" class="col-form-label"> <span class="resaltado">*</span>Fecha de Nacimiento</label>
                                 <div class="col-12">
-                                    <input class="form-control" type="date" value="1990-01-01" id="fecha_nacimiento" required>
+                                    <input class="form-control" type="date" value="1990-01-01" name="fecha_nacimiento" id="fecha_nacimiento" required>
                                 </div>
                             </div>
                             <div class="col-sm-4">

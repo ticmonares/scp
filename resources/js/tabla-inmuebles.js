@@ -37,22 +37,22 @@ function cargarDataTable() {
   });
 }
 $selectRegion = document.querySelector("#region");
-$selectRegion.addEventListener("change", function () {
-  cargarDistritos();
-  $param = $selectRegion.options[$selectRegion.selectedIndex].value;
-  buscarPor("region", $param);
-});
-$selectDistrito = document.querySelector("#distrito");
-$selectDistrito.addEventListener("change", function () {
-  cargarMunicipios();
-  $param = $selectDistrito.options[$selectDistrito.selectedIndex].value;
-  buscarPor("distrito_judicial", $param);
-});
-$selectMunicipio = document.querySelector("#municipio");
-$selectMunicipio.addEventListener("change", function () {
-  $param = $selectMunicipio.options[$selectMunicipio.selectedIndex].value;
-  buscarPor("municipio", $param);
-});
+// $selectRegion.addEventListener("change", function () {
+//   cargarDistritos();
+//   $param = $selectRegion.options[$selectRegion.selectedIndex].value;
+// //   buscarPor("region", $param);
+// // });
+// $selectDistrito = document.querySelector("#distrito");
+// $selectDistrito.addEventListener("change", function () {
+//   cargarMunicipios();
+//   $param = $selectDistrito.options[$selectDistrito.selectedIndex].value;
+//   buscarPor("distrito_judicial", $param);
+// });
+// $selectMunicipio = document.querySelector("#municipio");
+// $selectMunicipio.addEventListener("change", function () {
+//   $param = $selectMunicipio.options[$selectMunicipio.selectedIndex].value;
+//   buscarPor("municipio", $param);
+// });
 var result = "";
 window.onload = function () {
   alCargar();
@@ -60,7 +60,7 @@ window.onload = function () {
 };
 
 function alCargar() {
-  cargarDistritos();
+  // cargarDistritos();
   //cargarMunicipios();
   //buscarPorRegion();
 }
@@ -82,7 +82,7 @@ function cargarDistritos() {
   const opt = getRegion();
   httpRequest(urlGetDistrito + opt, function () {
     //console.log(this.responseText);
-    $distritos = JSON.parse(this.responseText);
+    // $distritos = JSON.parse(this.responseText);
     if ($distritos[0] === undefined) {
       $distrito = 0;
     } else {
@@ -127,7 +127,7 @@ function cargarMunicipios($distrito) {
   //console.log(urlGetMunicipios + opt);
   httpRequest(urlGetMunicipios + opt, function () {
     //console.log(this.responseText);
-    $municipios = JSON.parse(this.responseText);
+    // $municipios = JSON.parse(this.responseText);
     //console.log($municipios);
     //console.log($municipios);
     $municipios.forEach((municipio) => {

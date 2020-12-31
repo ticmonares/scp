@@ -4,7 +4,7 @@
 define('URL','http://localhost/scp/');
 //Definimos los datos de la BD
 define('HOST','localhost');
-define('DB','scp');
+define('DB','scp2');
 define('USER','root');
 define('PASS','');
 define ('CHARSET','utf8mb4');

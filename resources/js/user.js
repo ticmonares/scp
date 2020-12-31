@@ -4,11 +4,11 @@ $(document).ready(function() {
 } );
 const urlTabla = "http://localhost/sci/usuarios/borrarUsuario/"
 //Definimos una constante con una colección de los botones que tengan la clase btnEliminar
-const botones = document.querySelectorAll(".btnEliminar");
-//Con un foreach le asignamos un listener a todos los botones
-botones.forEach(boton => {
+const botonesDelete = document.querySelectorAll(".btnEliminar");
+//Con un foreach le asignamos un listener a todos los botonesDelete
+botonesDelete.forEach(botonDelete => {
     //Agregamos el listener para el click
-    boton.addEventListener("click", function(){
+    botonDelete.addEventListener("click", function(){
         //Almacenamos en una constante la no_empleado obtenida del data de cada renglon
         const id = this.dataset.id;
         const no_empleado = this.dataset.matricula;

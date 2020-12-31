@@ -21,16 +21,17 @@ class ConsultaModel extends Model
         `id_paciente`,
         `cve_paciente`,
         `nombres`,
-        `apellido_1`,
-        `apellido_2`,
+        `apellido1`,
+        `apellido2`,
         `genero`,
         `fecha_nacimiento`,
+        `fecha_registro`
         -- `ocupacion`,
         -- `motivo`,
-        `actividad_fisica`,
+        -- `actividad_fisica`,
         -- `frecuencia_actividad`,
         -- `duracion_actividad`,
-        `ultimo_peso`
+        -- `ultimo_peso`
         -- `estatura`,
         -- `cintura`,
         -- `cadera`,
@@ -42,7 +43,7 @@ class ConsultaModel extends Model
         -- `horario_mas_hambre`,
         -- `agua`,
         -- `liquidos`
-        FROM registro_pacientes ORDER BY id_paciente ";
+        FROM pacientes ORDER BY id_paciente ";
         try {
             $query = $this->db->conn()->prepare($stringQuery);
             if ($query->execute()) {
@@ -113,99 +114,48 @@ class ConsultaModel extends Model
     //Insert
     function insert($datos)
     {
-        $noExpediente = $datos['noExpediente'];
-        //echo $noExpediente . "<br>";
-        $noInventario = $datos['noInventario'];
-        $region = $datos['region'];
-        //echo $region . "<br>";
-        $distrito = $datos['distrito'];
-        //echo $distrito . "<br>";
-        $municipio = $datos['municipio'];
-        //echo $municipio . "<br>";
-        $edificio = $datos['edificio'];
-        //echo $edificio . "<br>";
-        $domicilio = $datos['domicilio'];
-        //echo $domicilio . "<br>";
-        $modalidad = $datos['modalidad'];
-        //echo $modalidad . "<br>";
-        $estado = $datos['estado'];
-        //echo $estado . "<br>";
-        $superficie = $datos['superficie'];
-        //echo $superficie . "<br>";
-        $valorAvaluo = $datos['valorAvaluo'];
-        $id_user = $_SESSION['user_id'];
+        $cve_paciente = 003;
+        $nombres = $datos['nombres'];
+        $apellido1 = $datos['apellido1'];
+        $apellido2 = $datos['apellido2'];
+        $genero = $datos['genero'];
+        $fecha_nacimiento = $datos['fecha_nacimiento'];
+        // $id_user = $_SESSION['user_id'];
         //Obtenemos fecha de registro
-        $fecha_generada = getdate();
+        $fecha_registro = getdate();
         //Damos formato
-        $agno = $fecha_generada['year'];
-        $mes = $fecha_generada['mon'];
-        $dia = $fecha_generada['mday'];
-        $fecha_generada = Core::formatDBFecha($agno, $mes, $dia);
-        //echo $fecha_generada;
-        //Obteniendo datos del PDF de status
-        //echo var_dump($doc_status);
-        //$nombreArchivo = $doc_status['name'];
-        // $nombreArchivo = $this->getLastRegistroId().$id_user.$fecha_generada.$municipio.".pdf";
-        // $tipo = $doc_status['type'];
-        // $tamanio = $doc_status['size'];
-        // $ruta = $doc_status['tmp_name'];
-        // $destino = "resources/archivosStatus/".$nombreArchivo;
-
-        // if ( $nombreArchivo != ""  ){
-        //     if(copy($ruta, $destino)){
-        //         //echo "exito";
-        //         $doc_status = $nombreArchivo;
-        //     }else{
-        //         //echo "el fracaso te hace mejor";
-        //     }
-        // }
-
-        $stringQuery = "INSERT INTO registro_pacientes(
-            id, 
-            no_expediente, 
-            no_inventario,
-            id_region, 
-            id_distrito_judicial, 
-            id_municipio, 
-            edificio, 
-            domicilio, 
-            id_modalidad_prop, 
-            id_estado_proc, 
-            superficie, 
-            valor_avaluo,
-            id_usuario, 
-            fecha_generada)
+        $agno = $fecha_registro['year'];
+        $mes = $fecha_registro['mon'];
+        $dia = $fecha_registro['mday'];
+        $fecha_registro = Core::formatDBFecha($agno, $mes, $dia);
+        $stringQuery = "INSERT INTO pacientes(
+            id_paciente,
+            cve_paciente,
+            nombres,
+            apellido1,
+            apellido2,
+            genero,
+            fecha_nacimiento,
+            fecha_registro)
             VALUES (
-            :id, 
-            :no_expediente, 
-            :no_inventario,
-            :id_region, 
-            :id_distrito_judicial, 
-            :id_municipio, 
-            :edificio, 
-            :domicilio, 
-            :id_modalidad_prop, 
-            :id_estado_proc, 
-            :superficie, 
-            :valor_avaluo,
-            :id_usuario, 
-            :fecha_generada)
+            :id_paciente,
+            :cve_paciente,
+            :nombres,
+            :apellido1,
+            :apellido2,
+            :genero,
+            :fecha_nacimiento,
+            :fecha_registro)
          ";
         $datos = [
-            'id' => null,
-            'no_expediente' => $noExpediente,
-            'no_inventario' => $noInventario,
-            'id_region' =>  $region,
-            'id_distrito_judicial' => $distrito,
-            'id_municipio' =>  $municipio,
-            'edificio' =>  $edificio,
-            'domicilio' => $domicilio,
-            'id_modalidad_prop' => $modalidad,
-            'id_estado_proc' => $estado,
-            'superficie' => $superficie,
-            'valor_avaluo' => $valorAvaluo,
-            'id_usuario' => $id_user,
-            'fecha_generada' =>  $fecha_generada
+            'id_paciente' => null,
+            'cve_paciente' => $cve_paciente,
+            'nombres' => $nombres,
+            'apellido1' => $apellido1,
+            'apellido2' => $apellido2,
+            'genero' => $genero,
+            'fecha_nacimiento' => $fecha_nacimiento,
+            'fecha_registro' => $fecha_registro
         ];
         try {
             $query = $this->db->conn()->prepare($stringQuery);
@@ -217,7 +167,7 @@ class ConsultaModel extends Model
                 return false;
             }
         } catch (PDOException $e) {
-            //print ("Error -> " . $e->getMessage());
+            print ("Error -> " . $e->getMessage());
         }
     }
     //Inertamos contactos
@@ -247,7 +197,7 @@ class ConsultaModel extends Model
     }
     //insertamos observaciones
     function insertObservacion($noExpediente, $observaciones)
-    {   
+    {
         //print $observaciones;
         $stringQuery = "INSERT INTO `observaciones`(`no_expediente`, `observacion`) VALUES (:no_expediente, :observacion) ";
         try {
@@ -298,7 +248,7 @@ class ConsultaModel extends Model
         try {
             $query = $this->db->conn()->prepare($stringQuery);
             if ($query->execute(['id' => $id_registro])) {
-                $row = $query->fetchObject();    
+                $row = $query->fetchObject();
                 //echo var_dump($row);
                 return $row;
             } else {
@@ -310,14 +260,15 @@ class ConsultaModel extends Model
             return null;
         }
     }
-    function getIdByNoExpediente($noExpediente){
+    function getIdByNoExpediente($noExpediente)
+    {
         $stringQuery = "SELECT id FROM registro_pacientes WHERE no_expediente = :noExpediente";
         try {
             $query = $this->db->conn()->prepare($stringQuery);
-            if ($query->execute(['noExpediente' => $noExpediente])){
+            if ($query->execute(['noExpediente' => $noExpediente])) {
                 $id = $query->fetchObject();
                 return $id;
-            }else{
+            } else {
                 return null;
             }
         } catch (PDOException $e) {
@@ -507,15 +458,16 @@ class ConsultaModel extends Model
             return null;
         }
     }
-    function getObservacion($noExpediente){
+    function getObservacion($noExpediente)
+    {
         $stringQuery = "SELECT observacion FROM observaciones WHERE no_expediente = :no_expediente";
         try {
             $query = $this->db->conn()->prepare($stringQuery);
-            $data = ['no_expediente' => $noExpediente ];
-            if ($query->execute($data)){
+            $data = ['no_expediente' => $noExpediente];
+            if ($query->execute($data)) {
                 $observacion = $query->fetchObject();
                 return $observacion;
-            }else{
+            } else {
                 // print "Error al obtener observacion";
                 return null;
             }
@@ -524,7 +476,7 @@ class ConsultaModel extends Model
             return null;
         }
     }
-    
+
     function update($idRegistro, $datos, $observaciones, $noExpediente)
     {
         $datos['id'] = $idRegistro;
@@ -548,21 +500,21 @@ class ConsultaModel extends Model
             $query = $this->db->conn()->prepare($stringQuery);
             if ($query->execute($datos)) {
                 //evaluamos si existe el registro lo editamos
-                if ($this->existeObservacion($noExpediente) > 0){
+                if ($this->existeObservacion($noExpediente) > 0) {
                     $observacion = $this->updateObservacion($observaciones, $noExpediente);
-                    if ($observacion){
+                    if ($observacion) {
                         //print "Exito al actualizar la observación";
                         return true;
-                    }else{
+                    } else {
                         print "Error al actualizar la observación";
                         return false;
                     }
-                }else{
+                } else {
                     //Sino lo creamos
-                    if ($this->insertObservacion($noExpediente, $observaciones)){
+                    if ($this->insertObservacion($noExpediente, $observaciones)) {
                         //print "Exito al insertar observación desde actualización";
                         return true;
-                    }else{
+                    } else {
                         print "Error al insertar observación desde actualización";
                         return false;
                     }
@@ -576,17 +528,18 @@ class ConsultaModel extends Model
             return false;
         }
     }
-    function updateObservacion($observaciones, $noExpediente){
+    function updateObservacion($observaciones, $noExpediente)
+    {
         $stringQuery = "UPDATE observaciones SET observacion = :observacion WHERE no_expediente = :no_expediente";
         try {
             $query = $this->db->conn()->prepare($stringQuery);
             $data = [
                 'observacion' =>  $observaciones,
                 'no_expediente' => $noExpediente
-            ];            
-            if ($query->execute($data)){
+            ];
+            if ($query->execute($data)) {
                 return true;
-            }else{
+            } else {
                 print "Error al actualizar observación";
                 return false;
             }
@@ -595,7 +548,8 @@ class ConsultaModel extends Model
             return false;
         }
     }
-    function existeObservacion($noExpediente){
+    function existeObservacion($noExpediente)
+    {
         $stringQuery = "SELECT no_expediente FROM observaciones WHERE no_expediente = :no_expediente";
         try {
             $query = $this->db->conn()->prepare($stringQuery);
@@ -613,7 +567,8 @@ class ConsultaModel extends Model
             return false;
         }
     }
-    function updateInmuebleImg($noExpediente, $datosImg, $formato){
+    function updateInmuebleImg($noExpediente, $datosImg, $formato)
+    {
         $id_user = $_SESSION['user_id'];
         $fecha_generada = getdate();
         $agno = $fecha_generada['year'];
@@ -624,7 +579,7 @@ class ConsultaModel extends Model
         //Obteniendo datos del PDF de status
         // echo var_dump($documento);
         $nombreArchivo = $datosImg['name'];
-        $nombreArchivo = "Imagen-" . $noExpediente . "-" . $id_user . "-" . $fecha_generada .".". $formato;
+        $nombreArchivo = "Imagen-" . $noExpediente . "-" . $id_user . "-" . $fecha_generada . "." . $formato;
         //$tipo = $datosImg['type'];
         //$tamanio = $datosImg['size'];
         $ruta = $datosImg['tmp_name'];
@@ -644,7 +599,7 @@ class ConsultaModel extends Model
                         'id_usuario'  => $id_user
                     ];
                     if ($query->execute($arrayDatos)) {
-                       // print "Archivo guardado";
+                        // print "Archivo guardado";
                         return true;
                     } else {
                         print "Error al subir archivo";
@@ -695,7 +650,8 @@ class ConsultaModel extends Model
             return false;
         }
     }
-    function existeImagen($noExpediente){
+    function existeImagen($noExpediente)
+    {
         $stringQuery = "SELECT no_expediente FROM doc_img_inmuebles WHERE no_expediente = :no_expediente";
         try {
             $query = $this->db->conn()->prepare($stringQuery);
@@ -775,7 +731,8 @@ class ConsultaModel extends Model
             return false;
         }
     }
-    function getImagenInmueble($noExpediente){
+    function getImagenInmueble($noExpediente)
+    {
         $imagenes = [];
         $stringQuery = "SELECT nombre, fecha FROM doc_img_inmuebles WHERE no_expediente = :noExpediente";
         try {
@@ -783,13 +740,13 @@ class ConsultaModel extends Model
             $data = [
                 'noExpediente' => $noExpediente
             ];
-            if ($query->execute($data)){
+            if ($query->execute($data)) {
                 while ($row = $query->fetchObject()) {
                     array_push($imagenes, $row);
                 }
                 //echo $imagenes;
                 return $imagenes;
-            }else{
+            } else {
                 return null;
             }
         } catch (PDOException $e) {
@@ -849,7 +806,8 @@ class ConsultaModel extends Model
         }
     }
     //Método para insertar documentos de acciones realizads
-    function insertAccionDoc( $noExpediente, $documento) {
+    function insertAccionDoc($noExpediente, $documento)
+    {
         $id_user = $_SESSION['user_id'];
         //Damos formato
         //Obtenemos fecha de registro
@@ -915,8 +873,8 @@ class ConsultaModel extends Model
         //Obteniendo datos del PDF de status
         // echo var_dump($documento);
         //$nombreArchivo = $datosImg['name'];
-        
-        $nombreArchivo = "Imagen-" . $noExpediente . "-" . $id_user . "-" . $fecha_generada ."-".$nombreArchivo .".". $formato;
+
+        $nombreArchivo = "Imagen-" . $noExpediente . "-" . $id_user . "-" . $fecha_generada . "-" . $nombreArchivo . "." . $formato;
         //$tipo = $datosImg['type'];
         //$tamanio = $datosImg['size'];
         $ruta = $datosImg['tmp_name'];
@@ -1011,7 +969,8 @@ class ConsultaModel extends Model
             return null;
         }
     }
-    function selectPlano($noExpediente){
+    function selectPlano($noExpediente)
+    {
         "HOOLA";
     }
 }
