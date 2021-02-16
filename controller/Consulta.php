@@ -38,15 +38,18 @@ class Consulta extends Controller
             $apellido2 = $_POST['apellido2'];
             $genero = $_POST['genero'];
             $fecha_nacimiento = $_POST['fecha_nacimiento'];
+            $ocupacion = $_POST['ocupacion'];
             $datos = [
-                // 'id_paciente' => null,
-                'cve_paciente', $cve_paciente,
+                'cve_paciente' => $cve_paciente,
                 'nombres' => $nombres,
                 'apellido1' => $apellido1,
                 'apellido2' => $apellido2,
                 'genero' => $genero,
-                'fecha_nacimiento' => $fecha_nacimiento
+                'fecha_nacimiento' => $fecha_nacimiento,
+                'ocupacion' => $ocupacion
             ];
+            // print "<br> <br> <br> <br> <br> <br>";
+            // print var_dump("DAtos desde consulta: " . $datos);
             if ($this->model->insert($datos)) {
                 //print "Exito";
                 //Insertamos la imagen después de crear el regsitro con no_expediente
@@ -236,29 +239,29 @@ class Consulta extends Controller
             $idRegistro = $param;
         }
         $registro = $this->model->getById($idRegistro);
-        $modalidades  = $this->model->getModalidades();
-        $estados  = $this->model->getEstadosProc();
-        //echo var_dump($registro);
-        $noExpediente = $registro->no_expediente;
-        $docStatus = $this->verDocumentosStatus($noExpediente);
-        $docAcciones = $this->verDocumentosAcciones($noExpediente);
+        // $modalidades  = $this->model->getModalidades();
+        // $estados  = $this->model->getEstadosProc();
+        // //echo var_dump($registro);
+        // $noExpediente = $registro->no_expediente;
+        // $docStatus = $this->verDocumentosStatus($noExpediente);
+        // $docAcciones = $this->verDocumentosAcciones($noExpediente);
         if ($registro) {
             //$mensaje = "Exito";
             $this->view->registro = $registro;
-            $this->view->modalidades  = $modalidades;
-            $this->view->estados_proc  = $estados;
-            //echo var_dump($docStatus);
-            $this->view->docStatus = $docStatus;
-            $this->view->docAcciones = $docAcciones;
-            //$this->view->mensaje = "Ver detalles";
-            //Agregamos los contactos
-            $this->view->contactos = $this->verContactos($noExpediente);
-            $this->view->observacion = $this->verObservacion($noExpediente);
-            $this->view->imagen = $this->verImagen($noExpediente);
+            // $this->view->modalidades  = $modalidades;
+            // $this->view->estados_proc  = $estados;
+            // //echo var_dump($docStatus);
+            // $this->view->docStatus = $docStatus;
+            // $this->view->docAcciones = $docAcciones;
+            // //$this->view->mensaje = "Ver detalles";
+            // //Agregamos los contactos
+            // $this->view->contactos = $this->verContactos($noExpediente);
+            // $this->view->observacion = $this->verObservacion($noExpediente);
+            // $this->view->imagen = $this->verImagen($noExpediente);
             //Planos
-            require_once 'Obra.php';
-            $planos = new Obra();
-            $this->view->planos = $planos->getPlanoByNoExpediente($noExpediente);
+            // require_once 'Obra.php';
+            // $planos = new Obra();
+            // // $this->view->planos = $planos->getPlanoByNoExpediente($noExpediente);
             //print var_dump($this->view->planos);
             $this->view->render('consulta/detalle');
         } else {

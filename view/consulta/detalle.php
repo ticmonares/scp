@@ -12,7 +12,7 @@
     <div class="container mt-4 py-5 mb-5 bg-light rounded">
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
-                <h1 class="display-4"><?php echo $this->registro->nombres . " " . $this->registro->apellido_1 . " " . $this->registro->apellido_2; ?> </h1>
+                <h1 class="display-4"><?php echo $this->registro->nombres . " " . $this->registro->apellido1 . " " . $this->registro->apellido2; ?> </h1>
                 <p class="lead">
                     <strong>
                         <!-- ID: <?php echo $this->registro->id_paciente; ?> -->
@@ -28,6 +28,7 @@
         }
         ?>
         <div class="row">
+            <!-- <?php var_dump($this->registro); ?> -->
             <div class="col-md-10 mx-auto">
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
@@ -55,7 +56,7 @@
                             <div class="col-3">
                                 <strong>Ocupación: </strong>
                                 <?php
-                                echo $this->registro->ocupacion;
+                                echo $this->registro->nombre_ocupacion;
                                 ?>
                             </div>
                         </div>

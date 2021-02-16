@@ -68,19 +68,20 @@ class ConsultaModel extends Model
     }
     function getLastRegistroId()
     {
-        $stringQuery = "SELECT id_paciente FROM registro_pacientes ORDER BY id_paciente DESC LIMIT 1";
+        $stringQuery = "SELECT id_paciente FROM pacientes ORDER BY id_paciente DESC LIMIT 1";
         try {
             $query = $this->db->conn()->prepare($stringQuery);
             if ($query->execute()) {
                 $row = $query->fetchObject();
-                //var_dump($row);
-                return $row->id;
+                // var_dump($row);
+                return $row->id_paciente;
             }
         } catch (PDOException $e) {
             return null;
             //print ("Error -> " . $e->getMessage()  );
         }
     }
+  
     function getLastStatusId()
     {
         $stringQuery = "SELECT id FROM doc_status ORDER BY id DESC LIMIT 1";
@@ -113,13 +114,15 @@ class ConsultaModel extends Model
     }
     //Insert
     function insert($datos)
-    {
-        $cve_paciente = 003;
+    {   
+        // print var_dump($datos);
+        $cve_paciente = $datos['cve_paciente'];
         $nombres = $datos['nombres'];
         $apellido1 = $datos['apellido1'];
         $apellido2 = $datos['apellido2'];
         $genero = $datos['genero'];
         $fecha_nacimiento = $datos['fecha_nacimiento'];
+        $ocupacion = $datos['ocupacion'];
         // $id_user = $_SESSION['user_id'];
         //Obtenemos fecha de registro
         $fecha_registro = getdate();
@@ -136,7 +139,8 @@ class ConsultaModel extends Model
             apellido2,
             genero,
             fecha_nacimiento,
-            fecha_registro)
+            fecha_registro,
+            activo)
             VALUES (
             :id_paciente,
             :cve_paciente,
@@ -145,7 +149,8 @@ class ConsultaModel extends Model
             :apellido2,
             :genero,
             :fecha_nacimiento,
-            :fecha_registro)
+            :fecha_registro,
+            :activo)
          ";
         $datos = [
             'id_paciente' => null,
@@ -155,19 +160,50 @@ class ConsultaModel extends Model
             'apellido2' => $apellido2,
             'genero' => $genero,
             'fecha_nacimiento' => $fecha_nacimiento,
-            'fecha_registro' => $fecha_registro
+            'fecha_registro' => $fecha_registro,
+            'activo' => 1
         ];
         try {
             $query = $this->db->conn()->prepare($stringQuery);
             if ($query->execute($datos)) {
                 //print("Éxito en el registro");
-                return true;
+                if ( $this->registrarOcupacion(null,  $ocupacion ) ){
+                    return true;
+                }else{
+                    // No se registro ocupación
+                    print ("No se registro ocupación");
+                    return false;
+                }
             } else {
                 //print("Error en el registro");
                 return false;
             }
         } catch (PDOException $e) {
             print ("Error -> " . $e->getMessage());
+        }
+    }
+    function registrarOcupacion($id_paciente = null, $ocupacion){
+        if ($ocupacion){
+            $id_paciente = $this->getLastRegistroId();
+            // print $id_paciente;
+            $stringQuery = "INSERT INTO pac_ocupacion (id_paciente, nombre_ocupacion) VALUES (:id_paciente, :nombre_ocupacion)" ;
+            $datos = [
+                'id_paciente' => $id_paciente,
+                'nombre_ocupacion' => $ocupacion
+            ];
+            try {
+                $query = $this->db->conn()->prepare($stringQuery);
+                if ($query->execute($datos)) {
+                    return true;
+                }else{
+                    return false;
+                }
+            } catch (PDOException $e) {
+                return false;
+            }
+        }else{
+            //Devolvemos verdadero por que no hay que hacer nada
+            return true;
         }
     }
     //Inertamos contactos
@@ -220,36 +256,40 @@ class ConsultaModel extends Model
     function getById($id_registro)
     {
         $stringQuery = "SELECT 
-        `id_paciente`,
+        pacientes.id_paciente,
         `cve_paciente`,
         `nombres`,
-        `apellido_1`,
-        `apellido_2`,
+        `apellido1`,
+        `apellido2`,
         `genero`,
         `fecha_nacimiento`,
-        `ocupacion`,
-        `motivo`,
-        `actividad_fisica`,
-        `frecuencia_actividad`,
-        `duracion_actividad`,
-        `ultimo_peso`,
-        `estatura`,
-        `cintura`,
-        `cadera`,
-        `presion_arterial`,
-        `comidas`,
-        `comidas_fines`,
-        `persona_prepara`,
-        `apetito`,
-        `horario_mas_hambre`,
-        `agua`,
-        `liquidos`
-        FROM registro_pacientes WHERE id_paciente = :id";
+        pac_ocupacion.nombre_ocupacion
+        
+        -- `ocupacion`,
+        -- `motivo`,
+        -- `actividad_fisica`,
+        -- `frecuencia_actividad`,
+        -- `duracion_actividad`,
+        -- `ultimo_peso`,
+        -- `estatura`,
+        -- `cintura`,
+        -- `cadera`,
+        -- `presion_arterial`,
+        -- `comidas`,
+        -- `comidas_fines`,
+        -- `persona_prepara`,
+        -- `apetito`,
+        -- `horario_mas_hambre`,
+        -- `agua`,
+        -- `liquidos`
+        FROM pacientes
+        INNER JOIN pac_ocupacion ON pacientes.id_paciente = pac_ocupacion.id_paciente
+        WHERE pacientes.id_paciente = :id_paciente AND activo = 1";
         try {
             $query = $this->db->conn()->prepare($stringQuery);
-            if ($query->execute(['id' => $id_registro])) {
+            if ($query->execute(['id_paciente' => $id_registro])) {
                 $row = $query->fetchObject();
-                //echo var_dump($row);
+                echo var_dump($row);
                 return $row;
             } else {
                 print "Fallo al ejecutar";
