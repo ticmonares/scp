@@ -4,7 +4,7 @@
         SCP <strong>Frutart Nutrición</strong> 2020
         </span>
         <span class="text-light"> 
-        Powered by <strong>CeroYUno</strong> 2020
+        Powered by <strong>CeroYUno (GIT)</strong> 2020
         </span>
     </div>
 </footer>
